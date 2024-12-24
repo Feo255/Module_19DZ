@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "menu.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block main %}
+    <H1>Игры</H1>
+    {% endblock %}
+     {% block menu %}
+    {{block.super}}
+    {% endblock %}
+    {% block content %}
+
+    <ul>
+        {% for game in games %}
+            <li>
+                {{game.title}} | {{game.description}} Цена: {{game.cost}}
+                <button>Купить</button>
+            </li>
+         {% endfor %}
+    </ul>
+
+    <button><a href="http://127.0.0.1:8000">На главную</a></button>
+
+
+{% endblock %}
+</body>
+</html>
