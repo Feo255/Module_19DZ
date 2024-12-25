@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from .forms import UserRegister
 from django.http import HttpResponse
 from .models import *
+from django.core.paginator import Paginator
 
 
 
@@ -38,6 +39,13 @@ def sign_up_by_html(request):
                 if password != repeat_password:
                     info = {'error': 'Пароли не совпадают'}
     return render(request, 'registration_page.html', context=info)
+
+def news(request):
+    news = Post.objects.all()
+    paginator = Paginator(news, 10)
+    page_number = request.GET.get('page')
+    page_news = paginator.get_page(page_number)
+    return render(request, 'news.html', {'page_news':page_news})
 
 #def sign_up_by_django(request):
  #   global info
